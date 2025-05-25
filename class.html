@@ -5,26 +5,44 @@
   <title>Class Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       background: #121212;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
     }
     .note-container {
       background: #1e1e1e;
-      padding: 40px 30px;
+      padding: 32px 16px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      width: 400px;
+      width: 100%;
+      max-width: 500px;
       text-align: center;
+      box-sizing: border-box;
+      margin: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 1.5em;
     }
     select {
-      width: 90%;
+      width: 100%;
+      max-width: 350px;
       margin: 10px 0;
       padding: 10px;
       border-radius: 6px;
@@ -32,6 +50,7 @@
       background: #232323;
       color: #fff;
       font-size: 1em;
+      box-sizing: border-box;
     }
     .note {
       margin-top: 20px;
@@ -41,6 +60,23 @@
       min-height: 80px;
       text-align: left;
       white-space: pre-wrap;
+      width: 100%;
+      max-width: 350px;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      overflow-y: auto;
+      max-height: 60vh;
+    }
+    @media (max-width: 600px) {
+      .note-container {
+        padding: 16px 4px;
+        max-width: 98vw;
+      }
+      .note, select {
+        max-width: 98vw;
+        font-size: 1em;
+      }
     }
   </style>
 </head>
@@ -48,12 +84,12 @@
   <div class="note-container">
     <h2>📚 Class Notes</h2>
     <select id="classSelect">
+      <option value="class5computer">Class 5 Computer</option>
       <option value="class6computer">Class 6 Computer</option>
       <option value="class7computer">Class 7 Computer</option>
       <option value="class8computer">Class 8 Computer</option>
       <option value="class6health">Class 6 Health</option>
       <option value="class7health">Class 7 Health</option>
-      <option value="class5computer">Class 5 Computer</option>
     </select>
     <div class="note" id="noteDisplay"></div>
   </div>
