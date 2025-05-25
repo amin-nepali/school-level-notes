@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - School-Level-Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: #1e1e1e;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 320px;
+    }
+    input[type="password"] {
+      width: 90%;
+      padding: 10px;
+      margin: 20px 0;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #232323;
+      color: #fff;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px 30px;
+      border: none;
+      border-radius: 6px;
+      background: #90caf9;
+      color: #121212;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #64b5f6;
+    }
+    .error {
+      color: #ff5252;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>🔒 Enter Password</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="password" id="password" placeholder="Password" required autofocus>
+      <br>
+      <button type="submit">Login</button>
+      <div class="error" id="errorMsg"></div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('password').value;
+      if (pwd === 'admin') {
+        window.location.href = 'admin.html';
+      } else if (pwd === 'dlbbs') {
+        window.location.href = 'class.html';
+      } else {
+        document.getElementById('errorMsg').textContent = 'Incorrect password!';
+      }
+    });
+  </script>
+</body>
+</html>
