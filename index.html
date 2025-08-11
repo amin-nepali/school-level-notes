@@ -67,14 +67,13 @@
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const pwd = document.getElementById('password').value;
-      if (pwd === 'admin') {
-        window.location.href = 'admin.html';
-      } else if (pwd === 'dlbbs') {
-        window.location.href = 'class.html';
+      if (pwd === 'dlbbs') {
+        window.location.href = 'notes.html';
       } else {
         document.getElementById('errorMsg').textContent = 'Incorrect password!';
       }
     });
   </script>
 </body>
+
 </html>
