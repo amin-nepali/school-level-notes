@@ -1,1 +1,539 @@
-<!DOCTYPE html><html><head><title>Chapter 6</title></head><body><h1>Chapter 6</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Exercise - MS Word & Text Formatting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .exercise {
+            margin-bottom: 50px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid #4facfe;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise:hover {
+            transform: translateY(-5px);
+        }
+
+        .exercise-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .match-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .match-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e3f2fd;
+            transition: all 0.3s ease;
+        }
+
+        .match-item:hover {
+            border-color: #4facfe;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+        }
+
+        .match-term {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .match-definition {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .shortcut-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e8f5e8;
+            transition: all 0.3s ease;
+        }
+
+        .shortcut-item:hover {
+            border-color: #4caf50;
+            transform: scale(1.05);
+        }
+
+        .shortcut-key {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .shortcut-function {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .true-false-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .statement {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .statement.true {
+            border-left-color: #4caf50;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+        }
+
+        .statement.false {
+            border-left-color: #f44336;
+            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+        }
+
+        .statement-text {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .answer {
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .answer.true {
+            background: #4caf50;
+            color: white;
+        }
+
+        .answer.false {
+            background: #f44336;
+            color: white;
+        }
+
+        .fill-blank {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .blank {
+            background: #4facfe;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .qa-section {
+            margin-top: 30px;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .question-text {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .answer-text {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .answer-text ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .answer-text li {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .match-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Computer Science Exercise</h1>
+            <p>MS Word & Text Formatting - Complete Solutions</p>
+        </div>
+
+        <div class="content">
+            <!-- Exercise 1: Match the Following -->
+            <div class="exercise">
+                <h2 class="exercise-title">1. Match the Following</h2>
+                <div class="match-container">
+                    <div class="match-item">
+                        <div class="match-term">Formatting</div>
+                        <div class="match-definition">changing the appearance of a text or picture</div>
+                    </div>
+                    <div class="match-item">
+                        <div class="match-term">Alignment</div>
+                        <div class="match-definition">arrange text in a vertically straight line</div>
+                    </div>
+                    <div class="match-item">
+                        <div class="match-term">Superscript</div>
+                        <div class="match-definition">above the normal line of the text</div>
+                    </div>
+                    <div class="match-item">
+                        <div class="match-term">Subscript</div>
+                        <div class="match-definition">below the normal line of the text</div>
+                    </div>
+                    <div class="match-item">
+                        <div class="match-term">WordArt</div>
+                        <div class="match-definition">stylish and attractive text format</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercise 2: Shortcut Keys -->
+            <div class="exercise">
+                <h2 class="exercise-title">2. Functions of Shortcut Keys</h2>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + V</div>
+                        <div class="shortcut-function">Paste</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + B</div>
+                        <div class="shortcut-function">Bold</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + I</div>
+                        <div class="shortcut-function">Italic</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + U</div>
+                        <div class="shortcut-function">Underline</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + X</div>
+                        <div class="shortcut-function">Cut</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + F</div>
+                        <div class="shortcut-function">Find</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + G</div>
+                        <div class="shortcut-function">Go To</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + Z</div>
+                        <div class="shortcut-function">Undo</div>
+                    </div>
+                    <div class="shortcut-item">
+                        <div class="shortcut-key">Ctrl + P</div>
+                        <div class="shortcut-function">Print</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercise 3: True/False -->
+            <div class="exercise">
+                <h2 class="exercise-title">3. True or False Statements</h2>
+                <div class="true-false-grid">
+                    <div class="statement true">
+                        <div class="statement-text">a. Title bar displays the name of the current document.</div>
+                        <span class="answer true">TRUE</span>
+                    </div>
+                    <div class="statement true">
+                        <div class="statement-text">a. Document area is the workspace of the document.</div>
+                        <span class="answer true">TRUE</span>
+                    </div>
+                    <div class="statement false">
+                        <div class="statement-text">b. MS Word is a graphic design software.</div>
+                        <span class="answer false">FALSE</span>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            <em>MS Word is a word processing software, not graphic design software.</em>
+                        </div>
+                    </div>
+                    <div class="statement false">
+                        <div class="statement-text">c. We cannot format picture in MS-Word.</div>
+                        <span class="answer false">FALSE</span>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            <em>MS Word allows extensive picture formatting options.</em>
+                        </div>
+                    </div>
+                    <div class="statement false">
+                        <div class="statement-text">d. Footer is the text which can be inserted at the top of the page.</div>
+                        <span class="answer false">FALSE</span>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            <em>Footer appears at the bottom of the page. Header appears at the top.</em>
+                        </div>
+                    </div>
+                    <div class="statement true">
+                        <div class="statement-text">e. Quick Access toolbar contains frequently used programs.</div>
+                        <span class="answer true">TRUE</span>
+                    </div>
+                    <div class="statement true">
+                        <div class="statement-text">f. Formatting text helps to make text more attractive.</div>
+                        <span class="answer true">TRUE</span>
+                    </div>
+                    <div class="statement false">
+                        <div class="statement-text">g. Watermark helps to keep the picture behind the texts on a document.</div>
+                        <span class="answer false">FALSE</span>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            <em>Watermark is typically text or image that appears faintly behind the main content.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercise 4: Fill in the Blanks -->
+            <div class="exercise">
+                <h2 class="exercise-title">4. Fill in the Gaps</h2>
+                <div class="fill-blank">
+                    <strong>a.</strong> The extension of word is <span class="blank">.docx</span>
+                </div>
+                <div class="fill-blank">
+                    <strong>b.</strong> <span class="blank">MS Word</span> is the software used to edit, format, and create text documents.
+                </div>
+                <div class="fill-blank">
+                    <strong>c.</strong> <span class="blank">Header</span> is a text that is placed at the top of every page.
+                </div>
+                <div class="fill-blank">
+                    <strong>d.</strong> Status bar is located at the <span class="blank">bottom</span> of the Windows.
+                </div>
+                <div class="fill-blank">
+                    <strong>e.</strong> There are <span class="blank">two</span> types of scroll bar in Windows.
+                </div>
+                <div class="fill-blank">
+                    <strong>f.</strong> <span class="blank">Justify</span> alignment arrange straight text on both sides of the paragraph.
+                </div>
+                <div class="fill-blank">
+                    <strong>g.</strong> The special feature which helps to keep text or picture at background of a document is <span class="blank">Watermark</span>.
+                </div>
+                <div class="fill-blank">
+                    <strong>h.</strong> The panel which contains various commands in multiple tab is <span class="blank">Ribbon</span>.
+                </div>
+            </div>
+
+            <!-- Exercise 6: Question Answers -->
+            <div class="exercise">
+                <h2 class="exercise-title">6. Answer the Following Questions</h2>
+                <div class="qa-section">
+                    <div class="question">
+                        <div class="question-text">a. What is word processing software? Give two examples.</div>
+                        <div class="answer-text">
+                            Word processing software is a computer application used to create, edit, format, and print text documents. It provides tools for typing, formatting text, inserting images, tables, and other elements.
+                            <br><strong>Examples:</strong>
+                            <ul>
+                                <li>Microsoft Word</li>
+                                <li>Google Docs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">b. What is MS-Word?</div>
+                        <div class="answer-text">
+                            MS-Word (Microsoft Word) is a word processing software developed by Microsoft. It is part of the Microsoft Office suite and is used to create, edit, format, and print text documents. It offers various formatting options, templates, and tools for professional document creation.
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">c. Write down some features of MS-Word?</div>
+                        <div class="answer-text">
+                            Key features of MS-Word include:
+                            <ul>
+                                <li>Text formatting (font, size, color, style)</li>
+                                <li>Page layout and margins</li>
+                                <li>Insert images, tables, and charts</li>
+                                <li>Spell check and grammar check</li>
+                                <li>Templates and themes</li>
+                                <li>Headers and footers</li>
+                                <li>Track changes and comments</li>
+                                <li>Mail merge functionality</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">d. What is header and footer?</div>
+                        <div class="answer-text">
+                            <strong>Header:</strong> A header is text or information that appears at the top of every page in a document. It typically contains page numbers, document titles, or chapter names.
+                            <br><br>
+                            <strong>Footer:</strong> A footer is text or information that appears at the bottom of every page in a document. It commonly includes page numbers, dates, author names, or copyright information.
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">e. List out the components of MS-Word Windows.</div>
+                        <div class="answer-text">
+                            Components of MS-Word Window:
+                            <ul>
+                                <li>Title Bar</li>
+                                <li>Menu Bar/Ribbon</li>
+                                <li>Quick Access Toolbar</li>
+                                <li>Document Area/Workspace</li>
+                                <li>Scroll Bars (Vertical and Horizontal)</li>
+                                <li>Status Bar</li>
+                                <li>Ruler</li>
+                                <li>View Buttons</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">f. List out the tabs available in Ribbon</div>
+                        <div class="answer-text">
+                            Main tabs in MS-Word Ribbon:
+                            <ul>
+                                <li>Home</li>
+                                <li>Insert</li>
+                                <li>Design</li>
+                                <li>Layout</li>
+                                <li>References</li>
+                                <li>Mailings</li>
+                                <li>Review</li>
+                                <li>View</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">g. What is formatting the text?</div>
+                        <div class="answer-text">
+                            Text formatting is the process of changing the appearance and style of text to make it more attractive, readable, and professional. This includes changing font type, size, color, applying bold, italic, underline, alignment, spacing, and other visual enhancements to improve the document's presentation.
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">h. What are bullet and numbering?</div>
+                        <div class="answer-text">
+                            <strong>Bullets:</strong> Small symbols (like dots, arrows, or custom images) placed before each item in a list to organize information in an unordered format.
+                            <br><br>
+                            <strong>Numbering:</strong> Sequential numbers (1, 2, 3... or a, b, c... or i, ii, iii...) placed before each item in a list to show order or hierarchy in information.
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">i. What are superscript and subscript?</div>
+                        <div class="answer-text">
+                            <strong>Superscript:</strong> Text that appears slightly above the normal line of text, commonly used for mathematical expressions (like x²), footnote references, or ordinal numbers (1st, 2nd).
+                            <br><br>
+                            <strong>Subscript:</strong> Text that appears slightly below the normal line of text, commonly used in chemical formulas (like H₂O) or mathematical expressions.
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">j. What is alignment in Word? Write its types.</div>
+                        <div class="answer-text">
+                            Alignment refers to how text is positioned horizontally within a paragraph or document.
+                            <br><br>
+                            <strong>Types of Alignment:</strong>
+                            <ul>
+                                <li><strong>Left Align:</strong> Text is aligned to the left margin</li>
+                                <li><strong>Center Align:</strong> Text is centered between left and right margins</li>
+                                <li><strong>Right Align:</strong> Text is aligned to the right margin</li>
+                                <li><strong>Justify:</strong> Text is aligned to both left and right margins, creating straight edges on both sides</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
