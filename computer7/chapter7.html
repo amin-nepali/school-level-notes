@@ -1,1 +1,471 @@
-<!DOCTYPE html><html><head><title>Chapter 7</title></head><body><h1>Chapter 7</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS-Excel Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #1f2937;
+            --text-primary: #e6edf3;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #30363d;
+            --success: #10b981;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #0d1117;
+                --bg-secondary: #161b22;
+                --bg-tertiary: #1f2937;
+                --text-primary: #e6edf3;
+                --text-secondary: #9ca3af;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .section {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.1);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-block {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .question {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .answer {
+            color: var(--text-primary);
+            padding-left: 15px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .true-false {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .true {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .false {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .feature-list, .function-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li, .function-list li {
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .feature-list strong, .function-list strong {
+            color: var(--accent);
+        }
+
+        code {
+            background-color: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #f97316;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+
+            .question-block {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        .highlight {
+            background-color: rgba(59, 130, 246, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 MS-Excel Study Guide</h1>
+            <p class="subtitle">Complete Reference for Excel Fundamentals</p>
+        </header>
+
+        <!-- Section 1: Fill in the Blanks -->
+        <div class="section">
+            <h2 class="section-title">✍️ Fill in the Blanks</h2>
+            
+            <div class="question-block">
+                <div class="question">a. MS-Excel contains _______ extension.</div>
+                <div class="answer"><strong>Answer:</strong> <code>.xlsx</code></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. The intersection of row and column is called _______.</div>
+                <div class="answer"><strong>Answer:</strong> Cell</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. The readymade built-in formula in excel are called _______.</div>
+                <div class="answer"><strong>Answer:</strong> Functions</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. _______ formula is used to calculate total in excel.</div>
+                <div class="answer"><strong>Answer:</strong> SUM</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. _______ is a collection of one or more spreadsheets.</div>
+                <div class="answer"><strong>Answer:</strong> Workbook</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. _______ is found in the bottom right corner of the cell.</div>
+                <div class="answer"><strong>Answer:</strong> Fill handle</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">g. The symbol used for text concatenation is _______.</div>
+                <div class="answer"><strong>Answer:</strong> <code>&</code> (ampersand)</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">h. _______ value represent either True or False.</div>
+                <div class="answer"><strong>Answer:</strong> Boolean</div>
+            </div>
+        </div>
+
+        <!-- Section 2: True or False -->
+        <div class="section">
+            <h2 class="section-title">✅ True or False</h2>
+            
+            <div class="question-block">
+                <div class="question">a. MS-Excel is used to store and arrange data efficiently. 
+                    <span class="true-false true">TRUE</span>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. Once entered value in a cell cannot be deleted. 
+                    <span class="true-false false">FALSE</span>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. Arithmetic operators are used for mathematical calculations. 
+                    <span class="true-false true">TRUE</span>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. Name box displays the name of the active cell. 
+                    <span class="true-false true">TRUE</span>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. <code>RAND()</code> generates a fix number. 
+                    <span class="true-false false">FALSE</span>
+                </div>
+                <div class="answer"><strong>Explanation:</strong> It generates a random number.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. Cell address is commonly known as cell reference. 
+                    <span class="true-false true">TRUE</span>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">g. A worksheet contains multiple workbooks. 
+                    <span class="true-false false">FALSE</span>
+                </div>
+                <div class="answer"><strong>Explanation:</strong> A Workbook contains multiple Worksheets.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">h. A formula in excel always begins with <code>=</code> sign. 
+                    <span class="true-false true">TRUE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Choose the Best Answer -->
+        <div class="section">
+            <h2 class="section-title">📝 Choose the Best Answer</h2>
+            
+            <div class="question-block">
+                <div class="question">a. Which of the following is a spreadsheet software?</div>
+                <div class="answer"><strong>Answer:</strong> <span class="highlight">iv. All of them</span> (Excel, Libra, Lotus 123)</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. What is the purpose of spreadsheet software?</div>
+                <div class="answer"><strong>Answer:</strong> <span class="highlight">i. Storing data</span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. The formula in excel begins with _______.</div>
+                <div class="answer"><strong>Answer:</strong> <span class="highlight">iv. =</span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. The intersection of rows and columns is called _______.</div>
+                <div class="answer"><strong>Answer:</strong> <span class="highlight">ii. Cell</span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. Which of the following is a correct name of a cell?</div>
+                <div class="answer"><strong>Answer:</strong> <span class="highlight">i. A66</span> (A column letter is followed by a row number.)</div>
+            </div>
+        </div>
+
+        <!-- Section 4: Very Short Answers -->
+        <div class="section">
+            <h2 class="section-title">🔍 Very Short Answers</h2>
+            
+            <div class="question-block">
+                <div class="question">a. List out any two spreadsheets software.</div>
+                <div class="answer">Two spreadsheets software are <strong>MS-Excel</strong> and <strong>Google Sheets</strong>.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. What is the extension of Excel?</div>
+                <div class="answer">The extension of Excel is <code>.xlsx</code>.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. What is cell?</div>
+                <div class="answer">Cell is defined as the <strong>intersection of a row and a column</strong> in a worksheet.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. What is Name Box?</div>
+                <div class="answer">Name Box is a small box that displays the <strong>address or name of the active cell</strong> or selected cell range.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. What is Formula Bar?</div>
+                <div class="answer">Formula Bar is a bar that displays the <strong>contents of the active cell</strong> and is used to enter or edit formulas and data.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. List out any two reference operators used in MS Excel.</div>
+                <div class="answer">Two reference operators are <strong>Colon</strong> (<code>:</code>) used for range (like <code>A1:A10</code>) and <strong>Comma</strong> (<code>,</code>) used to combine non-adjacent references.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">g. List out any two comparison operators used in MS Excel.</div>
+                <div class="answer">Two comparison operators are <strong>Equals to</strong> (<code>=</code>) and <strong>Greater than</strong> (<code>></code>).</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">h. What is Fill Icon?</div>
+                <div class="answer">Fill Icon is the small square found at the <strong>bottom-right corner of the active cell</strong>, used for auto-filling data or formulas.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">i. What is meant by merging the cell?</div>
+                <div class="answer">Merging cells is the process of <strong>combining two or more adjacent cells</strong> into a single larger cell for better alignment or presentation.</div>
+            </div>
+        </div>
+
+        <!-- Section 5: Long Answers -->
+        <div class="section">
+            <h2 class="section-title">💡 Long Answers</h2>
+            
+            <div class="question-block">
+                <div class="question">a. What is a spreadsheet? Give some examples.</div>
+                <div class="answer">
+                    <strong>Spreadsheet</strong> is defined as a computer application that can <strong>store, organize, analyze, and calculate data</strong> in a tabular format (rows and columns). 
+                    <br><br>
+                    <strong>Examples:</strong> MS-Excel and Google Sheets.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. What are the features of spreadsheet?</div>
+                <div class="answer">
+                    <strong>The features of spreadsheet are:</strong>
+                    <ul class="feature-list">
+                        <li><strong>Calculations:</strong> Performing complex calculations using formulas and functions.</li>
+                        <li><strong>Data Organization:</strong> Storing data in an organized grid of rows and columns.</li>
+                        <li><strong>Data Analysis:</strong> Analyzing data through tools like sorting, filtering, and conditional formatting.</li>
+                        <li><strong>Visual Representation:</strong> Creating charts and graphs to visualize data trends.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. What is MS-Excel?</div>
+                <div class="answer">
+                    MS-Excel is a popular <strong>spreadsheet software developed by Microsoft</strong> that is specifically designed for data entry, analysis, financial calculations, and generating reports.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. What is a worksheet?</div>
+                <div class="answer">
+                    Worksheet is defined as the <strong>primary page or document</strong> used within Excel to store and work with data; it is made up of a grid of rows and columns where all the cells are located.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. What is a workbook?</div>
+                <div class="answer">
+                    Workbook is defined as the <strong>entire Excel file</strong> that holds a collection of one or more worksheets. Think of the workbook as a physical book, and the worksheets as the pages inside it.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. What do you mean by Excel Filling?</div>
+                <div class="answer">
+                    Excel Filling is the process of <strong>copying data or a formula to adjacent cells quickly</strong>, usually by dragging the Fill Handle (the small square) to automatically populate a series or replicate a calculation.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">g. What is a formula? Write its importance.</div>
+                <div class="answer">
+                    <strong>Formula</strong> is defined as an expression that performs calculations on values in a worksheet. 
+                    <br><br>
+                    <strong>Importance:</strong> It allows users to perform automatic calculations, ensuring that the results are instantly updated whenever the input data changes.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">h. What is a function? Write its importance.</div>
+                <div class="answer">
+                    <strong>Function</strong> is defined as a pre-defined or built-in formula in Excel that performs specific calculations, like <code>SUM</code> or <code>AVERAGE</code>. 
+                    <br><br>
+                    <strong>Importance:</strong> It makes complex and frequent calculations simpler and faster to apply, saving the user time from manually writing out a long formula.
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">i. Mention different types of function used in Excel. Explain them.</div>
+                <div class="answer">
+                    <strong>Different types of functions used in Excel are:</strong>
+                    <ul class="function-list">
+                        <li><strong>Mathematical/Trigonometric Functions:</strong> Used for basic and advanced math operations. Example: <code>SUM</code> (adds numbers).</li>
+                        <li><strong>Statistical Functions:</strong> Used for analyzing data sets. Example: <code>AVERAGE</code> (finds the mean value).</li>
+                        <li><strong>Logical Functions:</strong> Used for making decisions or testing conditions. Example: <code>IF</code> (returns one value if a condition is true, and another if false).</li>
+                        <li><strong>Date and Time Functions:</strong> Used to work with dates and times. Example: <code>TODAY</code> (returns the current date).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
