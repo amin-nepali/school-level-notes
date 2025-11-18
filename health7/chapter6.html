@@ -1,1 +1,415 @@
-<!DOCTYPE html><html><head><title>Chapter 6</title></head><body><h1>Chapter 6</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Education Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #1f2937;
+            --text-primary: #e6edf3;
+            --text-secondary: #9ca3af;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border: #30363d;
+            --highlight: #3b82f6;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #0d1117;
+                --bg-secondary: #161b22;
+                --bg-tertiary: #1f2937;
+                --text-primary: #e6edf3;
+                --text-secondary: #9ca3af;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .section {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-block {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .question {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .answer {
+            color: var(--text-primary);
+            padding-left: 15px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            line-height: 1.8;
+        }
+
+        .answer strong {
+            color: var(--highlight);
+        }
+
+        .highlight {
+            background-color: rgba(16, 185, 129, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
+        .step-list, .benefit-list, .reason-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .step-list li, .benefit-list li, .reason-list li {
+            padding: 15px;
+            margin-bottom: 12px;
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .step-list li strong, .benefit-list li strong, .reason-list li strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .sub-section {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+        }
+
+        .sub-section-title {
+            color: var(--highlight);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+
+            .question-block {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .answer {
+                padding-left: 10px;
+            }
+        }
+
+        code {
+            background-color: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #f97316;
+            font-size: 0.9em;
+        }
+
+        .exercise-name {
+            color: var(--highlight);
+            font-weight: 600;
+        }
+
+        .command {
+            background-color: rgba(59, 130, 246, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--highlight);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏃‍♂️ Physical Education Study Guide</h1>
+            <p class="subtitle">Complete Reference for Physical Training & Drills</p>
+        </header>
+
+        <!-- Section A: Very Short Answers -->
+        <div class="section">
+            <h2 class="section-title">🔍 Give Very Short Answers to These Questions</h2>
+            
+            <div class="question-block">
+                <div class="question">a. What are physical exercises?</div>
+                <div class="answer">Physical exercises are defined as <strong>activities that are planned and performed regularly</strong> to improve or maintain physical fitness and overall health.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. What do you do before doing any sort of exercises?</div>
+                <div class="answer">Before doing any sort of exercises, you must perform <strong>warming-up and stretching</strong> to prepare the muscles and prevent injury.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. What is the exercise you do for your chest?</div>
+                <div class="answer">An exercise commonly done for the chest is the <span class="exercise-name">Push-up</span>.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. Name the exercises you do for calves?</div>
+                <div class="answer">The exercises done for the calves are generally called <span class="exercise-name">Calf Raises</span>.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. Who gives the commands during drills?</div>
+                <div class="answer">The commands during drills are typically given by the <strong>Physical Training (PT) teacher</strong> or an instructor.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. Why is the "About turn" command given?</div>
+                <div class="answer">The <span class="command">"About turn"</span> command is given to instruct the drill participant to <strong>turn 180 degrees</strong> to face the opposite direction.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">g. At which command do you move forward during a drill?</div>
+                <div class="answer">You move forward during a drill at the command <span class="command">"March"</span> or <span class="command">"Quick March"</span>.</div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">h. When is the drill completed?</div>
+                <div class="answer">The drill is completed when the command <span class="command">"Dismiss"</span> or <span class="command">"Shabd"</span> (a local term used for dismissal/end) is given by the instructor.</div>
+            </div>
+        </div>
+
+        <!-- Section B: Short Answers -->
+        <div class="section">
+            <h2 class="section-title">📝 Give Short Answers to These Questions</h2>
+            
+            <div class="question-block">
+                <div class="question">a. Give any two ways to stretch your legs before exercise.</div>
+                <div class="answer">
+                    <strong>Two ways to stretch your legs before exercise are:</strong>
+                    <div class="sub-section">
+                        <div class="sub-section-title">1. Quadriceps Stretch:</div>
+                        This is done by holding the foot and pulling it towards the back/buttocks.
+                    </div>
+                    <div class="sub-section">
+                        <div class="sub-section-title">2. Hamstring Stretch:</div>
+                        This is done by sitting or standing and reaching towards the toes to feel a stretch along the back of the thigh.
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. In a sentence each, explain the two exercises you do for your legs.</div>
+                <div class="answer">
+                    <strong>Two exercises done for the legs are:</strong>
+                    <div class="sub-section">
+                        <div class="sub-section-title">1. Squats:</div>
+                        This exercise is done by bending the knees and lowering the hips as if sitting in a chair, which strengthens the thighs and glutes.
+                    </div>
+                    <div class="sub-section">
+                        <div class="sub-section-title">2. Lunges:</div>
+                        This exercise is done by taking a large step forward and lowering the body until both knees are bent at a 90-degree angle, which targets each leg individually.
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">c. Write down any two benefits of drills.</div>
+                <div class="answer">
+                    <strong>Two benefits of drills are:</strong>
+                    <ul class="benefit-list">
+                        <li>
+                            <strong>It builds discipline:</strong>
+                            Drills teach participants to follow instructions precisely and immediately, which helps build discipline.
+                        </li>
+                        <li>
+                            <strong>It promotes teamwork:</strong>
+                            Performing movements in synchronization requires coordination and attention to others, thereby promoting teamwork and unity.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">d. What are students expected to do when "ATTENTION" and "STAND AT EASE" commands are given?</div>
+                <div class="answer">
+                    <div class="sub-section">
+                        <div class="sub-section-title">When <span class="command">"ATTENTION"</span> is commanded:</div>
+                        Students are expected to stand firmly with their heels together, body straight, and hands tightly by their sides.
+                    </div>
+                    <div class="sub-section">
+                        <div class="sub-section-title">When <span class="command">"STAND AT EASE"</span> is commanded:</div>
+                        Students are expected to step one foot out, keep their hands joined behind their back, and relax slightly while remaining silent.
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">e. How would you do a "right turn"? Write down a couple of steps.</div>
+                <div class="answer">
+                    <strong>To perform a "right turn":</strong>
+                    <ul class="step-list">
+                        <li>
+                            <strong>Step 1 - Pivot:</strong>
+                            Pivot on the heel of the right foot and the ball of the left foot.
+                        </li>
+                        <li>
+                            <strong>Step 2 - Bring feet together:</strong>
+                            Move the left foot smartly to meet the right foot, returning to the position of attention while facing the new direction.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">f. What do you do when the "Eyes right" command is given?</div>
+                <div class="answer">
+                    When the <span class="command">"Eyes right"</span> command is given, you <strong>turn your head sharply to the right</strong> to look towards the reviewing officer or flag, while keeping your body and shoulders straight, and then turn your head back to the front upon receiving the next command (like <span class="command">"Eyes front"</span>).
+                </div>
+            </div>
+        </div>
+
+        <!-- Section C: Long Answers -->
+        <div class="section">
+            <h2 class="section-title">💡 Write Long Answers to These Questions</h2>
+            
+            <div class="question-block">
+                <div class="question">a. You must have heard a common phrase "Your health is your wealth". Can you give any four reason to back this saying?</div>
+                <div class="answer">
+                    The phrase <span class="highlight">"Your health is your wealth"</span> means that your well-being is the most valuable thing you possess.
+                    <br><br>
+                    <strong>Four reasons to back this saying are:</strong>
+                    <ul class="reason-list">
+                        <li>
+                            <strong>Saves Money:</strong>
+                            Being healthy means you spend less money on doctors, medicines, and hospital visits.
+                        </li>
+                        <li>
+                            <strong>Increases Energy:</strong>
+                            Good health provides the energy and stamina needed to work hard, study effectively, and participate in all daily activities successfully.
+                        </li>
+                        <li>
+                            <strong>Ensures Happiness:</strong>
+                            A healthy body and mind lead to a positive outlook, reducing stress and anxiety, which contributes to overall happiness and a better quality of life.
+                        </li>
+                        <li>
+                            <strong>Allows for Work/Study:</strong>
+                            Only a healthy person can fully utilize their time and talents, allowing them to earn a living or study well to secure their future, which are the real forms of wealth.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="question">b. What is the exercise you do for your chest? How do you do this exercise? Explain in three steps.</div>
+                <div class="answer">
+                    The primary exercise done for the chest is the <span class="exercise-name">Push-up</span>. This exercise strengthens the chest (pectorals), shoulders, and triceps.
+                    <br><br>
+                    <strong>Steps to perform a Push-up:</strong>
+                    <ul class="step-list">
+                        <li>
+                            <strong>Step 1 - Starting Position:</strong>
+                            Lie face down on the ground, placing your hands shoulder-width apart and slightly ahead of your shoulders, with your body straight (forming a plank from head to heel).
+                        </li>
+                        <li>
+                            <strong>Step 2 - Lowering Phase:</strong>
+                            Slowly bend your elbows outwards to lower your chest towards the ground until your elbows are at a 90-degree angle. Keep your body in a straight line without letting your hips sag or rise.
+                        </li>
+                        <li>
+                            <strong>Step 3 - Pushing Phase:</strong>
+                            Push the ground away from you by straightening your elbows, returning your body back to the straight starting position. This completes one repetition.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
