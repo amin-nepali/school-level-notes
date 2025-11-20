@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linear Hierarchy Diagrams — Housefly & Wheat</title>
+  <style>
+    :root{
+      --bg:#0b0f14;/* near-black */
+      --card:#0f1720;
+      --muted:#94a3b8;
+      --accent:#7c5cff; /* neon-ish purple */
+      --accent-2:#00d4ff; /* cyan */
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      --gap:18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050608 0%, #07101a 60%);color:#e6eef8}
+    .page{max-width:1100px;margin:28px auto;padding:24px}
+
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 30px rgba(124,92,255,0.18), inset 0 -6px 18px rgba(0,0,0,0.3);font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:13px}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:20px;box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .card h2{margin:0 0 8px;font-size:16px}
+    .card p.tip{color:var(--muted);font-size:13px;margin:0 0 18px}
+
+    /* Diagram vertical flow using flex column */
+    .diagram{display:flex;flex-direction:column;gap:12px;align-items:center;padding:14px}
+    .node{min-width:220px;max-width:100%;padding:14px 18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(4px);box-shadow:0 6px 18px rgba(2,6,23,0.6);position:relative;text-align:center}
+    .node .title{font-weight:600}
+    .node .subtitle{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* Arrow between nodes */
+    .node:not(:last-child)::after{
+      content:'';width:2px;height:26px;background:linear-gradient(180deg,var(--accent),var(--accent-2));position:absolute;left:50%;transform:translateX(-50%);bottom:-26px;border-radius:2px;box-shadow:0 6px 18px rgba(124,92,255,0.08);
+    }
+
+    /* Make species box more prominent */
+    .species{background:linear-gradient(90deg, rgba(124,92,255,0.14), rgba(0,212,255,0.06));border:1px solid rgba(124,92,255,0.22)}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* small screen tweaks */
+    @media (max-width:560px){.node{min-width:180px;padding:12px}}
+
+    /* helper to show full taxonomy horizontally on wide screens */
+    .compact{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .compact .node{min-width:140px}
+
+    /* download button */
+    .controls{display:flex;gap:10px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04060a;border:none;box-shadow:0 8px 30px rgba(124,92,255,0.14)}
+
+    /* small decorative grid behind diagrams */
+    .card::before{content:'';position:absolute;left:-40px;top:-40px;width:160px;height:160px;background:radial-gradient(circle at 30% 30%, rgba(124,92,255,0.06), transparent 30%), radial-gradient(circle at 70% 70%, rgba(0,212,255,0.03), transparent 20%);transform:rotate(20deg);pointer-events:none;border-radius:20px;display:none}
+    @media(min-width:880px){.card::before{display:block}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo">LH</div>
+        <div>
+          <h1>Linear Hierarchy Diagrams</h1>
+          <p class="lead">Housefly (<em>Musca domestica</em>) and Wheat (<em>Triticum aestivum</em>) — responsive, dark design.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn" onclick="copyHTML()">Copy HTML</button>
+        <button class="btn primary" onclick="downloadFile()">Download .html</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Housefly -->
+      <section class="card" aria-labelledby="hf">
+        <h2 id="hf">Housefly — <em>Musca domestica</em></h2>
+        <p class="tip">Linear taxonomy from Kingdom → Species. (Click Download to save this page.)</p>
+        <div class="diagram" role="list">
+          <div class="node" role="listitem"><div class="title">Kingdom</div><div class="subtitle">Animalia</div></div>
+          <div class="node" role="listitem"><div class="title">Phylum</div><div class="subtitle">Arthropoda</div></div>
+          <div class="node" role="listitem"><div class="title">Class</div><div class="subtitle">Insecta</div></div>
+          <div class="node" role="listitem"><div class="title">Order</div><div class="subtitle">Diptera</div></div>
+          <div class="node" role="listitem"><div class="title">Family</div><div class="subtitle">Muscidae</div></div>
+          <div class="node" role="listitem"><div class="title">Genus</div><div class="subtitle">Musca</div></div>
+          <div class="node species" role="listitem"><div class="title">Species</div><div class="subtitle"><em>Musca domestica</em></div></div>
+        </div>
+      </section>
+
+      <!-- Wheat -->
+      <section class="card" aria-labelledby="wt">
+        <h2 id="wt">Wheat — <em>Triticum aestivum</em></h2>
+        <p class="tip">Linear taxonomy from Kingdom → Species (uses Division instead of Phylum).</p>
+        <div class="diagram" role="list">
+          <div class="node" role="listitem"><div class="title">Kingdom</div><div class="subtitle">Plantae</div></div>
+          <div class="node" role="listitem"><div class="title">Division</div><div class="subtitle">Angiospermae (Angiosperms)</div></div>
+          <div class="node" role="listitem"><div class="title">Class</div><div class="subtitle">Monocotyledonae (Monocots)</div></div>
+          <div class="node" role="listitem"><div class="title">Order</div><div class="subtitle">Poales</div></div>
+          <div class="node" role="listitem"><div class="title">Family</div><div class="subtitle">Poaceae</div></div>
+          <div class="node" role="listitem"><div class="title">Genus</div><div class="subtitle">Triticum</div></div>
+          <div class="node species" role="listitem"><div class="title">Species</div><div class="subtitle"><em>Triticum aestivum</em></div></div>
+        </div>
+
+        <!-- compact horizontal view for wide screens -->
+        <div style="margin-top:18px">
+          <div style="color:var(--muted);font-size:13px;margin-bottom:8px">Compact (horizontal) view — useful for printing or wide displays:</div>
+          <div class="compact" aria-hidden="true">
+            <div class="node">Kingdom<br><small style="color:var(--muted)">Plantae</small></div>
+            <div class="node">Division<br><small style="color:var(--muted)">Angiospermae</small></div>
+            <div class="node">Class<br><small style="color:var(--muted)">Monocotyledonae</small></div>
+            <div class="node">Order<br><small style="color:var(--muted)">Poales</small></div>
+            <div class="node">Family<br><small style="color:var(--muted)">Poaceae</small></div>
+            <div class="node">Genus<br><small style="color:var(--muted)">Triticum</small></div>
+            <div class="node species">Species<br><small style="color:var(--muted)"><em>T. aestivum</em></small></div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer>
+      <div>Need changes? I can adjust colors, spacing or convert to an image/PDF.</div>
+      <div style="color:var(--muted);font-size:13px">Exam-ready • Responsive • Dark theme</div>
+    </footer>
+  </div>
+
+  <script>
+    // Copy whole page HTML to clipboard
+    function copyHTML(){
+      const html = `<!doctype html>` + '\n' + document.documentElement.outerHTML;
+      navigator.clipboard.writeText(html).then(()=>{
+        alert('Page HTML copied to clipboard — paste into a file and save as .html');
+      }).catch(()=>alert('Copy failed — try downloading instead.'));
+    }
+
+    // Download current HTML as a file
+    function downloadFile(){
+      const blob = new Blob(['<!doctype html>\n' + document.documentElement.outerHTML], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'hierarchy_diagrams.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
