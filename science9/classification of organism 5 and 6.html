@@ -5,21 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biology Questions 5 & 6</title>
     <style>
+        :root{
+            --page-bg: #f4f4f9;
+            --card-bg: #ffffff;
+            --accent: #3f51b5;
+            --muted: #607d8b;
+            --yellow: #ff9800;
+        }
+        html,body{
+            height:100%;
+        }
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
+            margin: 0;
+            background-color: var(--page-bg);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+        .container{
+            max-width: 900px;
+            margin: 24px auto;
+            background: var(--card-bg);
+            padding: 22px;
+            box-shadow: 0 6px 18px rgba(50,50,93,0.07);
+            border-radius: 8px;
         }
         h1 {
-            color: #3f51b5;
-            border-bottom: 3px solid #3f51b5;
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
             padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.5rem;
         }
         h2 {
             color: #00bcd4;
             margin-top: 25px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 6px;
         }
         h3 {
             color: #4caf50;
@@ -27,34 +49,56 @@
         }
         p {
             line-height: 1.6;
+            margin: 0.5rem 0 1rem 0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: transparent;
         }
+        .table-responsive{overflow-x:auto}
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            border: 1px solid #e9e9e9;
+            padding: 12px 14px;
             text-align: left;
+            vertical-align: top;
         }
         th {
-            background-color: #607d8b;
+            background-color: var(--muted);
             color: white;
+            font-weight: 600;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        tr:nth-child(even) td {
+            background-color: #fafafa;
         }
+        ul{margin:0.25rem 0;padding-left:1.1rem}
         .reason-box {
-            padding: 10px;
-            border-left: 4px solid #ff9800;
-            background-color: #fff3e0;
-            margin-bottom: 10px;
-            font-size: 0.95em;
+            padding: 12px;
+            border-left: 4px solid var(--yellow);
+            background-color: #fff8ef;
+            margin-bottom: 12px;
+            font-size: 0.97em;
+            border-radius: 3px;
         }
         .reason-box strong {
             color: #e65100;
+        }
+        /* Small screens */
+        @media (max-width:600px){
+            .container{margin:12px;padding:14px}
+            h1{font-size:1.25rem}
+            th,td{padding:10px}
+        }
+        /* Print rules */
+        @media print{
+            body{background: #fff;color:#000}
+            .container{box-shadow:none;border-radius:0;padding:0;margin:0}
+            .reason-box{background:transparent;border-left-color:#000}
+            table{box-shadow:none}
+            a[href]:after{content:none}
+            hr{display:block;border:0;border-top:1px solid #ccc;margin:0.5rem 0}
         }
     </style>
 </head>
