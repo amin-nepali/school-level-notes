@@ -5,64 +5,455 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chapter List</title>
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #0a0a0a;
+        min-height: 100vh;
+        padding: 40px 20px;
+        position: relative;
+        overflow-x: hidden;
     }
-    h1 {
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(74, 86, 226, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    header {
         text-align: center;
-        color: #333;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
     }
+
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 12px;
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        color: #888;
+        font-size: 1.1rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+    }
+
+    .search-box {
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 16px 24px;
+        padding-left: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        color: #e0e0e0;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .search-input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.08);
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-input::placeholder {
+        color: #666;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 1.2rem;
+    }
+
+    .search-wrapper {
+        position: relative;
+    }
+
     .file-list {
-        max-width: 400px;
-        margin: auto;
-        background: #fff;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        display: grid;
+        gap: 16px;
+        animation: fadeInUp 1s ease;
     }
-    .file-list a {
-        display: block;
-        padding: 8px;
-        margin: 5px 0;
+
+    .chapter-card {
+        display: flex;
+        align-items: center;
+        padding: 20px 24px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
         text-decoration: none;
-        color: #007BFF;
-        background: #f0f0f0;
-        border-radius: 5px;
-        transition: background 0.3s;
+        color: #e0e0e0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
     }
-    .file-list a:hover {
-        background: #dce9ff;
+
+    .chapter-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .chapter-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(102, 126, 234, 0.4);
+        transform: translateX(8px);
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+    }
+
+    .chapter-card:hover::before {
+        transform: scaleY(1);
+    }
+
+    .chapter-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 20px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .chapter-card:hover .chapter-icon {
+        transform: rotate(10deg) scale(1.1);
+    }
+
+    .chapter-content {
+        flex: 1;
+    }
+
+    .chapter-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #fff;
+        text-transform: capitalize;
+    }
+
+    .chapter-subtitle {
+        font-size: 0.9rem;
+        color: #888;
+    }
+
+    .chapter-arrow {
+        color: #666;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+
+    .chapter-card:hover .chapter-arrow {
+        color: #667eea;
+        transform: translateX(5px);
+    }
+
+    .category-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(102, 126, 234, 0.15);
+        border: 1px solid rgba(102, 126, 234, 0.3);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        color: #8b9aef;
+        margin-left: 10px;
+        font-weight: 500;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+        font-size: 1.1rem;
+        display: none;
+    }
+
+    .no-results.show {
+        display: block;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .chapter-card {
+            padding: 16px 18px;
+        }
+
+        .chapter-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 1.3rem;
+            margin-right: 16px;
+        }
+
+        .chapter-title {
+            font-size: 1rem;
+        }
     }
 </style>
 </head>
 <body>
-    <h1>Chapters</h1>
-    <div class="file-list">
-        <!-- Chapter Links -->
-<a href='classification of organism.html' target='_blank'>classification of organism</a>
-<a href='classification of organism 5 and 6.html' target='_blank'>classification of organism 5</a>
-<a href='hierarchy diagram of chapter 3.html' target='_blank'>hierarchy diagram of chapter 3</a>
-<a href='mushroom.html' target='_blank'>mushroom</a>
-<a href='mushroom2.html' target='_blank'>mushroom2</a>
-<a href='evolution.html' target='_blank'>evolution</a>
-<a href='evolution2.html' target='_blank'>evolution2</a>
-<a href='evolution3.html' target='_blank'>evolution3</a>
-<a href='ecosystem1.html' target='_blank'>ecosystem1</a>
-<a href='ecosystem2.html' target='_blank'>ecosystem2</a>
-<a href='force and motion.html' target='_blank'>force and motion</a>
-<a href='simple machine.html' target='_blank'>simple machine</a>
-<a href='nature and environment.html' target='_blank'>nature and environment</a>
+    <div class="container">
+        <header>
+            <h1>📚 Chapters</h1>
+            <p class="subtitle">Explore your learning materials</p>
+        </header>
 
+        <div class="search-box">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search chapters...">
+            </div>
+        </div>
 
+        <div class="file-list" id="fileList">
+            <a href='classification of organism.html' target='_blank' class="chapter-card" data-title="classification of organism">
+                <div class="chapter-icon">🔬</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Classification of Organism</div>
+                    <div class="chapter-subtitle">Biology • Chapter 1</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
 
-        
-        
-<a href='metal.html' target='_blank'>metal (chapter 17)</a>
+            <a href='classification of organism 5 and 6.html' target='_blank' class="chapter-card" data-title="classification of organism 5">
+                <div class="chapter-icon">🔬</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Classification of Organism 5</div>
+                    <div class="chapter-subtitle">Biology • Chapters 5 & 6</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
 
+            <a href='hierarchy diagram of chapter 3.html' target='_blank' class="chapter-card" data-title="hierarchy diagram of chapter 3">
+                <div class="chapter-icon">📊</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Hierarchy Diagram of Chapter 3</div>
+                    <div class="chapter-subtitle">Biology • Visual Guide</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
 
+            <a href='mushroom.html' target='_blank' class="chapter-card" data-title="mushroom">
+                <div class="chapter-icon">🍄</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Mushroom</div>
+                    <div class="chapter-subtitle">Biology • Fungi Study</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='mushroom2.html' target='_blank' class="chapter-card" data-title="mushroom2">
+                <div class="chapter-icon">🍄</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Mushroom 2</div>
+                    <div class="chapter-subtitle">Biology • Advanced Fungi</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='evolution.html' target='_blank' class="chapter-card" data-title="evolution">
+                <div class="chapter-icon">🧬</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Evolution</div>
+                    <div class="chapter-subtitle">Biology • Natural Selection</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='evolution2.html' target='_blank' class="chapter-card" data-title="evolution2">
+                <div class="chapter-icon">🧬</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Evolution 2</div>
+                    <div class="chapter-subtitle">Biology • Part 2</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='evolution3.html' target='_blank' class="chapter-card" data-title="evolution3">
+                <div class="chapter-icon">🧬</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Evolution 3</div>
+                    <div class="chapter-subtitle">Biology • Part 3</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='ecosystem1.html' target='_blank' class="chapter-card" data-title="ecosystem1">
+                <div class="chapter-icon">🌍</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Ecosystem 1</div>
+                    <div class="chapter-subtitle">Environmental Science</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='ecosystem2.html' target='_blank' class="chapter-card" data-title="ecosystem2">
+                <div class="chapter-icon">🌍</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Ecosystem 2</div>
+                    <div class="chapter-subtitle">Environmental Science</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='force and motion.html' target='_blank' class="chapter-card" data-title="force and motion">
+                <div class="chapter-icon">⚡</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Force and Motion</div>
+                    <div class="chapter-subtitle">Physics • Mechanics</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='simple machine.html' target='_blank' class="chapter-card" data-title="simple machine">
+                <div class="chapter-icon">⚙️</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Simple Machine</div>
+                    <div class="chapter-subtitle">Physics • Engineering</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='nature and environment.html' target='_blank' class="chapter-card" data-title="nature and environment">
+                <div class="chapter-icon">🌿</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Nature and Environment</div>
+                    <div class="chapter-subtitle">Environmental Science</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+
+            <a href='metal.html' target='_blank' class="chapter-card" data-title="metal">
+                <div class="chapter-icon">⚗️</div>
+                <div class="chapter-content">
+                    <div class="chapter-title">Metal<span class="category-badge">Chapter 17</span></div>
+                    <div class="chapter-subtitle">Chemistry • Materials</div>
+                </div>
+                <span class="chapter-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="no-results" id="noResults">
+            <p>🔍 No chapters found matching your search.</p>
+        </div>
     </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const fileList = document.getElementById('fileList');
+        const noResults = document.getElementById('noResults');
+        const cards = document.querySelectorAll('.chapter-card');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const content = card.textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.add('show');
+            } else {
+                noResults.classList.remove('show');
+            }
+        });
+
+        // Add staggered animation on load
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.05}s`;
+        });
+    </script>
 </body>
 </html>
-
